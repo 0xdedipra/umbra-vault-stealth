@@ -1,61 +1,84 @@
-// Every tuning number and colour in one place. The playfield is a fixed 1280x720 logical area;
-// the renderer scales it to the window, so no rule below depends on the screen size.
+// UMBRA VAULT — shared constants: field size, palette, tuning numbers and control labels.
+// Everything else imports from here so the game's feel can be retuned in one place.
 
-export const FIELD = { width: 1280, height: 720, groundY: 664 };
+export const VIEW = { width: 1280, height: 800 };
 
-/** The simulation's fixed step, in seconds: 60 updates a second whatever the display's rate. */
-export const STEP = 1 / 60;
+/** Fixed simulation step (seconds); the loop accumulates real time into these. */
+export const STEP = 1 / 120;
 
 export const PLAYER = {
-  width: 72,
-  height: 24,
-  speed: 560,
-  invulnerable: 1.5,
+  radius: 13,
+  walk: 152,
+  run: 238,
+  crouch: 84,
+  noiseRadius: 118,
+  noiseEvery: 0.34,
+  interactRange: 42,
+  takedownRange: 38,
 };
 
-export const LIVES = 3;
-
-export const BLOCK = {
-  minWidth: 40,
-  maxWidth: 110,
-  height: 36,
-  speed: 240,
-  speedPerLevel: 30,
-  speedJitter: 90,
-  interval: 0.55,
-  intervalScale: 0.88,
-  minInterval: 0.14,
-  dodgePoints: 1,
+export const GUARD = {
+  radius: 14,
+  patrolSpeed: 62,
+  investigateSpeed: 98,
+  chaseSpeed: 150,
+  coneHalfAngle: 0.44,
+  coneRange: 252,
+  peripheralRange: 74,
+  catchRange: 30,
+  pauseAtWaypoint: 1.7,
+  lookSweep: 0.85,
 };
 
-export const COIN = {
-  size: 24,
-  speed: 190,
-  speedPerLevel: 14,
-  interval: 1.4,
-  intervalJitter: 0.8,
-  points: 10,
+export const DETECTION = {
+  suspiciousAt: 0.34,
+  alertAt: 1,
+  decayPerSecond: 0.22,
+  investigateMemory: 3.2,
+  huntSeconds: 6,
 };
 
-/** Seconds of play per level, and the last level: speeds and spawn rates stop growing there. */
-export const LEVEL = { seconds: 12, max: 12 };
-
-/** How many falling things can exist at once; the pool is allocated once, at boot. */
-export const POOL_SIZE = 64;
-
-export const PALETTE = {
-  backdrop: '#11141b',
-  sky: '#1b1f2a',
-  ground: '#2a3040',
-  player: '#4fc3f7',
-  block: '#e5534b',
-  coin: '#f2c94c',
-  panel: '#252b38',
-  text: '#eef1f5',
-  muted: '#8b93a3',
+export const ALARM = {
+  fromGuardSight: 0.20,
+  fromCamera: 0.30,
+  laserTrip: 0.45,
+  decayPerSecond: 0.055,
 };
 
-export const FONT = 'system-ui, -apple-system, "Segoe UI", sans-serif';
+export const CAMERA = { range: 265, halfAngle: 0.36, disableSeconds: 20 };
+export const COINS_PER_FLOOR = 3;
+export const COIN_RADIUS = 135;
 
-/** Where the best score is kept between visits (this browser only). */
-export const BEST_KEY = 'block-dodger.best';
+export const COLORS = {
+  night: '#05070f',
+  marbleA: '#2b3040',
+  marbleB: '#262b39',
+  grout: '#1a1e2a',
+  carpet: '#5d2138',
+  carpetTrim: '#c9a24d',
+  stoneA: '#27352c',
+  stoneB: '#232f27',
+  steelA: '#26272f',
+  steelB: '#22232b',
+  wall: '#3d4358',
+  wallTop: '#565f7a',
+  glass: 'rgba(150,200,235,0.20)',
+  glassEdge: 'rgba(190,225,250,0.75)',
+  gold: '#e8b64c',
+  guardBody: '#2e4d7d',
+  guardCap: '#1d3355',
+  playerBody: '#14423c',
+  playerTrim: '#39d0b4',
+  coneWarm: 'rgba(255,196,92,',
+  coneRed: 'rgba(255,64,64,',
+  exit: '#3dff8e',
+};
+
+export const CONTROLS_TEXT = [
+  'WASD / Arrows — move',
+  'SHIFT — run (fast, but your footsteps carry)',
+  'C / CTRL — crouch (quiet; hides behind low cover)',
+  'E — steal · silent takedown · use the camera panel',
+  'F — throw a coin toward the mouse to draw a guard away',
+  'R — restart floor · P — pause · M — mute',
+];
