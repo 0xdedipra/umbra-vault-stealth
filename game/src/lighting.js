@@ -175,7 +175,7 @@ export function drawDarkness(ctx, level, guardCones, cameraCones, time) {
   const d = darkCtx;
   d.save();
   d.clearRect(0, 0, VIEW.width, VIEW.height);
-  d.fillStyle = 'rgba(5,8,20,0.60)';
+  d.fillStyle = 'rgba(5,8,20,0.52)';
   d.fillRect(0, 0, VIEW.width, VIEW.height);
   d.globalCompositeOperation = 'destination-out';
   for (let i = 0; i < level.lights.length; i += 1) {

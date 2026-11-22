@@ -390,13 +390,15 @@ function stageShot(name) {
     game.prompt = '';
     return;
   }
-  // cover (default): Floor 1, the thief crouched behind the vase case, a flashlight close.
+  // cover (default): Floor 1, centre frame — the thief crouched in the gold mask
+  // case's shadow on its own carpet while a flashlight sweeps the carpet and
+  // breaks on the case; the second guard works the far corner, EXIT in frame.
   loadFloor(0);
   game.screen = 'play';
   const p = game.player;
-  p.x = 1082; p.y = 684; p.angle = -Math.PI / 2; p.crouched = true;
+  p.x = 688; p.y = 384; p.angle = Math.atan2(346 - 384, 640 - 688); p.crouched = true;
   const [g1, g2] = game.guards;
-  g1.x = 1012; g1.y = 556; g1.angle = Math.atan2(684 - 556, 1082 - 1012);
+  g1.x = 470; g1.y = 250; g1.angle = Math.atan2(346 - 250, 640 - 470);
   g1.meter = 0.55;
   g1.frozen = true;
   g1.cone = conePolygon(g1.x, g1.y, g1.angle, GUARD.coneHalfAngle, GUARD.coneRange, game.tall.concat(game.low));
@@ -407,7 +409,7 @@ function stageShot(name) {
   game.level.cases[1].taken = true; // the emerald is already hers
   game.loot = 2200;
   game.floorLoot = 2200;
-  game.prompt = 'E — steal the Vas Pusaka';
+  game.prompt = 'E — steal the Topeng Emas Kartika';
 }
 
 /* -------------------------------------- loop ------------------------------------ */
